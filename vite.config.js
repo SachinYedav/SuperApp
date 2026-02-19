@@ -58,6 +58,11 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         navigateFallback: '/index.html',
         
+        navigateFallbackDenylist: [
+          /^\/sitemap\.xml$/,
+          /^\/robots\.txt$/
+        ],
+        
         clientsClaim: true,
         skipWaiting: true,
       }
