@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    
+    <meta name="theme-color" content="#0f172a" />
+    
+    <meta name="description" content="SuperApp is your ultimate all-in-one workspace. Securely edit videos, audio, images, and PDFs offline. Includes developer tools, whiteboard, and arcade games." />
+    <title>SuperApp</title>
+
+    <script>
+      (function() {
+        try {
+          // 1. Get saved theme or default to 'dark' 
+          var savedTheme = localStorage.getItem('theme') || 'dark';
+          
+          // 2. Check if it should be dark
+          var isDark = savedTheme === 'dark' || 
+              (savedTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          
+          var html = document.documentElement;
+          var metaThemeColor = document.querySelector('meta[name="theme-color"]');
+          
+          // 3. Apply classes and meta colors instantly
+          if (isDark) {
+            html.classList.add('dark');
+            html.classList.remove('light');
+            if (metaThemeColor) metaThemeColor.setAttribute('content', '#0f172a');
+          } else {
+            html.classList.add('light');
+            html.classList.remove('dark');
+            if (metaThemeColor) metaThemeColor.setAttribute('content', '#f8fafc'); 
+          }
+        } catch (e) {
+          console.warn("Theme script failed", e);
+        }
+      })();
+    </script>
+
+    <style>
+      /* CSS Reset */
+      body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        font-family: system-ui, -apple-system, sans-serif;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      
+      /* DEFAULT (LIGHT MODE) BACKGROUND */
+      body {
+        background-color: #f8fafc;
+        color: #0f172a; 
+      }
+
+      /* DARK MODE BACKGROUND */
+      html.dark body {
+        background-color: #020617; 
+        color: #f8fafc; 
+      }
+      
+      /* Smooth Fade-in animation for React Mount */
+      #root:empty {
+        display: none;
+      }
+      #root {
+        opacity: 0;
+        animation: fadeIn 0.5s ease-out forwards;
+      }
+      @keyframes fadeIn {
+        to { opacity: 1; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

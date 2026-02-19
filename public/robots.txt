@@ -1,0 +1,33 @@
+# Allow all bots
+User-agent: *
+
+# 🚫 STRICTLY BLOCK PRIVATE AREAS
+# Ye pages exist karte hain par private hain (User Data)
+Disallow: /dashboard/
+Disallow: /settings/
+Disallow: /files/
+
+# 🚫 BLOCK TECHNICAL & UTILITY PAGES
+Disallow: /reset-password/
+Disallow: /offline/
+Disallow: /404/
+
+
+# ✅ ALLOW PUBLIC TOOLS & PAGES
+Allow: /
+Allow: /image-editor
+Allow: /pdf-tools
+Allow: /video-editor
+Allow: /audio-studio
+Allow: /screen-recorder
+Allow: /digital-canvas
+Allow: /math-tools/
+Allow: /dev-tools/
+Allow: /color-tools/
+Allow: /qr-tools/
+Allow: /skill-arcade/
+Allow: /productivity/
+Allow: /legal
+
+# 🗺️ SITEMAP LOCATION
+Sitemap: https://yoursite.com/sitemap.xml
