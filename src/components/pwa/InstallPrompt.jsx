@@ -23,10 +23,16 @@ export default function InstallPrompt() {
     setIsIOS(isIOSDevice);
 
     if (isIOSDevice) {
-      // iOS doesn't support 'beforeinstallprompt', 
+      // iOS doesn't support 'beforeinstallprompt'
       setIsVisible(true);
     } else {
       // 4. Android / Chrome / Edge Logic
+      
+      if (window.deferredPWAEvent) {
+        setDeferredPrompt(window.deferredPWAEvent);
+        setIsVisible(true);
+      }
+
       const handler = (e) => {
         e.preventDefault(); 
         setDeferredPrompt(e); 

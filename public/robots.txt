@@ -30,4 +30,4 @@ Allow: /productivity/
 Allow: /legal
 
 # 🗺️ SITEMAP LOCATION
-Sitemap: https://yoursite.com/sitemap.xml
+Sitemap: https://superapp-live.vercel.app/sitemap.xml

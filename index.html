@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     
     <meta name="theme-color" content="#0f172a" />
+    <meta name="google-site-verification" content="lnuE-6mzKfnJQ5a-GZ8hSBf0LMWS2KZajQ9CcovchXU" />
     
     <meta name="description" content="SuperApp is your ultimate all-in-one workspace. Securely edit videos, audio, images, and PDFs offline. Includes developer tools, whiteboard, and arcade games." />
     <title>SuperApp</title>
@@ -40,6 +41,13 @@
           console.warn("Theme script failed", e);
         }
       })();
+    </script>
+    <script>
+      window.deferredPWAEvent = null;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        window.deferredPWAEvent = e; 
+      });
     </script>
 
     <style>

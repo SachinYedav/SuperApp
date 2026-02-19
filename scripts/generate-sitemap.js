@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 
 // 1. App Domain 
-const DOMAIN = 'https://yoursite.com'; 
+const DOMAIN = 'https://superapp-live.vercel.app'; 
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

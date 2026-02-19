@@ -68,19 +68,19 @@ export default function AboutTab() {
             icon={Globe}
             label="Official Website"
             desc="superapp.com"
-            href="#"
+            href="https://superapp-live.vercel.app/"
           />
           <LinkRow
             icon={Github}
             label="Source Code"
-            desc="github.com/sachin/superapp"
-            href="#"
+            desc="github.com/SachinYedav/SuperApp"
+            href="https://github.com/SachinYedav/SuperApp/"
           />
           <LinkRow
             icon={Mail}
               label="Contact Support"
             desc="help@superapp.com"
-            href="#"
+            href="https://github.com/SachinYedav"
             isLast
           />
         </div>
@@ -205,7 +205,7 @@ export default function AboutTab() {
           />{" "}
           by
           <a
-            href="https://github.com/sachin"
+            href="https://github.com/SachinYedav"
             target="_blank"
             rel="noreferrer"
             className="font-bold text-slate-700 dark:text-slate-200 hover:text-blue-600 transition-colors"

@@ -116,9 +116,11 @@ const currentMeta = settingsSeo.tabs[activeTab] || settingsSeo.tabs[settingsSeo.
         <div className="lg:hidden sticky top-0 z-20 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm">
             
             {/* Page Title & User (Mobile Top Bar) */}
-            <div className="px-4 py-3 flex items-center justify-between">
-                <h1 className="text-xl font-bold text-slate-800 dark:text-white">Settings</h1>
-                <UserAvatar user={userData} size="xs" />
+            <div className="px-4 py-3 flex items-center justify-between gap-4">
+                <h1 className="text-xl font-bold text-slate-800 dark:text-white shrink-0">Settings</h1>
+                <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full overflow-hidden bg-slate-100 dark:bg-slate-800">
+                    <UserAvatar user={userData} size="xs" className="w-full h-full object-cover" />
+                </div>
             </div>
 
             {/* Scrollable Tabs */}
