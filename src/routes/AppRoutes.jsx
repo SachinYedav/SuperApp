@@ -19,7 +19,7 @@ const ResetPassword = React.lazy(() => import('../pages/ResetPassword'));
 
 // --- LAZY LOADING TOOLS ---
 const ImageEditor = React.lazy(() => import('../features/image-editor/ImageEditor'));
-const VideoEditor = React.lazy(() => import('../features/video-editor/videoEditor'));
+const VideoEditor = React.lazy(() => import('../features/video-editor/VideoEditor'));
 const PdfTools = React.lazy(() => import('../features/pdf-tools/PdfTools'));
 const QrTools = React.lazy(() => import('../features/qr-tools/QrTools'));
 const AudioStudio = React.lazy(() => import('../features/audio-studio/AudioStudio'));
