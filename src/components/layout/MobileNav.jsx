@@ -4,7 +4,7 @@ import {
   LayoutDashboard, Image, Video, FileText, 
   Settings, Music, QrCode, FolderOpen, Code,
   Calendar,  Monitor, TvMinimalPlay, Palette,
-  Bot,Gamepad2
+  Bot,Gamepad2, Calculator
 } from 'lucide-react';
 
 const NAV_ITEMS = [
@@ -16,6 +16,7 @@ const NAV_ITEMS = [
   { name: 'Audio', icon: Music, path: '/audio-studio' },
   { name: 'Screen Rec', icon: TvMinimalPlay  , path: '/screen-recorder' },
   { name: 'QR', icon: QrCode, path: '/qr-tools' },
+  { name: 'Math Hub', icon: Calculator, path: '/math-tools' },
   { name: 'Productivity', icon: Calendar, path: '/productivity' },
   { name: 'Digital Canvas', icon: Monitor, path: '/digital-canvas' },
   { name: 'Color Studio', icon: Palette, path: '/color-tools' },
