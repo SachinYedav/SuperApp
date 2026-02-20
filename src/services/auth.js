@@ -303,42 +303,44 @@ export class AuthService {
     try {
       console.log("🔵 Starting MFA Setup...");
       
-      // 1. Cleanup Logic
+      // 1. SILENT CLEANUP LOGIC
       if (typeof this.account.listAuthenticators === "function") {
-        const list = await this.account.listAuthenticators();
-        const existingTotp = list.authenticators.find(
-          (a) => a.type === "totp",
-        );
-        
-        if (existingTotp) {
-            try {
-                await this.account.deleteMfaAuthenticator(existingTotp.$id);
-            } catch (cleanupError) {
-                if (cleanupError.code === 401) {
-                    throw new Error("Security Alert: Please log out and log back in to generate a new 2FA code.");
-                }
-            }
+        try {
+          const list = await this.account.listAuthenticators();
+          const existingTotp = list.authenticators.find(
+            (a) => a.type === "totp",
+          );
+          if (existingTotp) {
+            await this.account.deleteMfaAuthenticator(existingTotp.$id);
+            console.log("Old MFA cleared.");
+          }
+        } catch (cleanupError) {
+           console.warn("Cleanup skipped (v14):", cleanupError.message);
         }
       } else {
         try {
-            await this.account.deleteMFAAuthenticator({ type: "totp" });
+           // SDK v13 fallback
+           await this.account.deleteMFAAuthenticator({ type: "totp" });
         } catch (cleanupError) {
-             if (cleanupError.code === 401) {
-                throw new Error("Security Alert: Please log out and log back in to generate a new 2FA code.");
-            }
+           console.warn("Cleanup skipped (v13):", cleanupError.message);
         }
       }
 
-      // 2. Create Logic
+      // 2. CREATE LOGIC 
+      console.log("🟢 Creating new MFA Authenticator...");
       if (typeof this.account.createMfaAuthenticator === "function") {
         return await this.account.createMfaAuthenticator("totp");
       } else {
         return await this.account.createMFAAuthenticator({ type: "totp" });
       }
+      
     } catch (error) {
       console.error("AuthService :: enableMfa :: error", error);
       if (error.code === 409) {
           throw new Error("2FA is already linked. Please log out and log back in to reset it.");
+      }
+      if (error.code === 401) {
+          throw new Error("Session expired. Please log in again to setup 2FA.");
       }
       throw error; 
     }
