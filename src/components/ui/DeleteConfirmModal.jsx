@@ -73,7 +73,7 @@ export default function DeleteConfirmModal({ isOpen, onClose }) {
         // 3. Logout & Cleanup
         await authService.logout();
         dispatch(logout());
-        navigate('/login');
+        navigate('/');
       } else {
         throw new Error("Server could not process deletion.");
       }
