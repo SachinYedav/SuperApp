@@ -9,6 +9,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 export default defineConfig({
+  assetsInclude: ['**/*.md'],
   plugins: [
     react(),
     tailwindcss(),
@@ -48,7 +49,7 @@ export default defineConfig({
       },
 
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,json,mjs,woff2,mp3,wav,wasm}'],
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,json,mjs,woff2,mp3,wav,wasm,md}'],
         globIgnores: [
           '**/pwa-192x192.png',
           '**/pwa-512x512.png',
@@ -83,5 +84,15 @@ export default defineConfig({
   build: {
     emptyOutDir: true,
     sourcemap: false, 
+    
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules') && id.includes('appwrite')) {
+            return 'vendor-appwrite';
+          }
+        }
+      }
+    }
   }
 })

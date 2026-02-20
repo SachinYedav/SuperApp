@@ -5,11 +5,17 @@ import { useDocsSearch } from '@/hooks/useDocsSearch';
 
 export default function DocsSearchBar() {
   const navigate = useNavigate();
+  
+  // Outer container ref (for click-outside)
   const searchRef = useRef(null);
+  
+  // Specific ref for the input element (for Cmd+K focus)
+  const inputRef = useRef(null); 
+  
   const { query, setQuery, results, isSearching } = useDocsSearch();
   const [isFocused, setIsFocused] = useState(false);
 
-  // Click Outside Logic
+  // 1. Click Outside Logic
   useEffect(() => {
     function handleClickOutside(event) {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -20,6 +26,25 @@ export default function DocsSearchBar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // 2. Cmd+K / Ctrl+K Global Shortcut Logic (Scoped only to this component)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault(); // Browser ka default behavior roko
+        
+        if (inputRef.current) {
+          inputRef.current.focus(); // Input ko focus do
+          setIsFocused(true);       // Dropdown logic ke liye state update karo
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown); // Cleanup on unmount
+    };
+  }, []);
+
   const handleSelectResult = (item) => {
     setQuery('');
     setIsFocused(false);
@@ -28,15 +53,19 @@ export default function DocsSearchBar() {
 
   return (
     <div className="relative w-full max-w-md" ref={searchRef}>
-      {/* Input Field */}
+      {/* Input Field Container */}
       <div className={`flex items-center gap-2 bg-slate-100 dark:bg-slate-900 px-3 py-2 rounded-xl border transition-all duration-200 ${isFocused ? 'border-blue-500 ring-4 ring-blue-500/10 dark:ring-blue-500/20' : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'}`}>
+        
+        {/* Dynamic Search Icon / Spinner */}
         {isSearching && query ? (
-           <Loader2 size={16} className="text-blue-500 animate-spin" />
+           <Loader2 size={16} className="text-blue-500 animate-spin shrink-0" />
         ) : (
-           <Search size={16} className="text-slate-400" />
+           <Search size={16} className="text-slate-400 shrink-0" />
         )}
         
+        {/* Actual Input Field */}
         <input 
+          ref={inputRef} 
           type="text" 
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -45,15 +74,22 @@ export default function DocsSearchBar() {
           className="bg-transparent border-none outline-none text-sm text-slate-700 dark:text-slate-200 w-full placeholder:text-slate-500"
         />
         
-        {/* Keyboard shortcut hint (Ctrl+K style) hidden on mobile */}
+        {/* Keyboard shortcut hint */}
         {!query && !isFocused && (
-            <kbd className="hidden sm:inline-block text-[10px] font-mono px-1.5 py-0.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded text-slate-400">
-                /
+            <kbd className="hidden sm:inline-block text-[10px] font-bold px-1.5 py-0.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded text-slate-400 pointer-events-none shrink-0">
+                ⌘K
             </kbd>
         )}
 
+        {/* Clear Button */}
         {query && (
-            <button onClick={() => setQuery('')} className="text-slate-400 hover:text-slate-600">
+            <button 
+                onClick={() => {
+                    setQuery('');
+                    inputRef.current?.focus(); 
+                }} 
+                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 shrink-0"
+            >
                 <X size={14} />
             </button>
         )}
@@ -61,8 +97,8 @@ export default function DocsSearchBar() {
 
       {/* Search Results Dropdown */}
       {isFocused && query && (
-        <div className="absolute top-full left-0 w-full mt-2 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden animate-fade-in-up origin-top z-50">
-            <div className="py-2">
+        <div className="absolute top-full left-0 w-full mt-2 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-100 dark:border-slate-800 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200 z-50">
+            <div className="py-2 max-h-[60vh] overflow-y-auto scrollbar-hide">
                 {results.length > 0 ? (
                     <>
                         <p className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Documentation Matches</p>

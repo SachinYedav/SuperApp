@@ -249,3 +249,128 @@ export const mathToolsSeo = {
         }
     }
 };
+
+// ==========================================
+// 9. DOCUMENTATION (TechArticle Type)
+// ==========================================
+export const docsSeo = {
+    basePath: '/docs',
+    defaultTab: 'introduction',
+    type: 'docs',
+    tabs: {
+        // --- GETTING STARTED ---
+        "introduction": {
+            title: "Introduction to SuperApp",
+            description: "Learn about SuperApp's ecosystem, core features, and how it simplifies your daily digital workflow.",
+            keywords: ["welcome", "about", "overview", "start", "intro", "guide", "features"]
+        },
+        "quick-start": {
+            title: "Quick Start & Auth",
+            description: "Setup your account, configure Appwrite integration, and enable PWA features for a seamless experience.",
+            keywords: ["setup", "login", "register", "authentication", "appwrite", "pwa", "install", "2fa"]
+        },
+        "dashboard": {
+            title: "Dashboard & Home",
+            description: "Navigate the SuperApp dashboard, access quick tools, view recent files, and monitor telemetry.",
+            keywords: ["home", "dashboard", "quick tools", "recent files", "telemetry", "welcome"]
+        },
+
+        // --- CORE & ARCHITECTURE ---
+        "cloud-storage": {
+            title: "Cloud Drive (My Files)",
+            description: "Deep dive into secure file storage, quota management, uploads, downloads, and cloud backup systems.",
+            keywords: ["files", "upload", "download", "space", "quota", "drive", "storage", "backup"]
+        },
+        "settings": {
+            title: "Settings & Control Center",
+            description: "Manage your profile preferences, UI themes, dark mode, local cache, and third-party integrations.",
+            keywords: ["profile", "theme", "dark mode", "cache", "clear", "integrations"]
+        },
+        "security-account": {
+            title: "Security & Account",
+            description: "Secure your account with 2FA, manage active sessions, reset passwords, or wipe your data completely.",
+            keywords: ["password", "reset", "otp", "mfa", "2fa", "delete account", "wipe", "sessions"]
+        },
+        "backend-architecture": {
+            title: "Backend Architecture",
+            description: "Understand the Appwrite backend, Node.js serverless functions, security roles, and queue workers.",
+            keywords: ["appwrite", "node.js", "serverless", "security", "queue worker", "emails"]
+        },
+
+        // --- PRODUCTIVITY & UTILITIES ---
+        "productivity": {
+            title: "Productivity Suite",
+            description: "Master sticky notes, Kanban task boards, Pomodoro focus timers, and daily habit tracking.",
+            keywords: ["sticky notes", "tasks", "to-do", "pomodoro", "focus", "timer", "habits", "streak"]
+        },
+        "dev-tools": {
+            title: "Developer Utilities",
+            description: "Comprehensive documentation for JSON formatters, JWT decoders, Base64 tools, and Regex debuggers.",
+            keywords: ["json", "formatter", "base64", "jwt", "regex", "password generator", "developers"]
+        },
+        "math-hub": {
+            title: "Math Hub Toolkit",
+            description: "Guides on using the scientific calculator, unit converter, financial EMI calculators, and graph plotter.",
+            keywords: ["calculator", "converter", "finance", "emi", "date", "scientific", "programmer"]
+        },
+        "pdf-tools": {
+            title: "PDF Master",
+            description: "Learn how to merge, split, compress, extract text, and manage PDF documents entirely offline.",
+            keywords: ["pdf", "merge", "split", "compress", "document", "extract", "image to pdf"]
+        },
+        "qr-studio": {
+            title: "QR Studio",
+            description: "Generate custom QR codes for URLs, WiFi, or text, and use the built-in scanner to read barcodes.",
+            keywords: ["qr", "scan", "code", "generate", "wifi", "barcode", "scanner", "history"]
+        },
+
+        // --- CREATIVE & MEDIA ---
+        "image-editor": {
+            title: "Image Editor",
+            description: "A complete guide to cropping, resizing, applying filters, and converting images (PNG, JPG, WebP).",
+            keywords: ["image", "photo", "crop", "resize", "filter", "convert", "compress", "png", "jpg", "webp"]
+        },
+        "color-master": {
+            title: "Color Master",
+            description: "Generate color palettes, check WCAG contrast ratios, create CSS gradients, and simulate color blindness.",
+            keywords: ["palette", "contrast", "gradient", "design", "wcag", "color picker", "simulator"]
+        },
+        "digital-canvas": {
+            title: "Digital Canvas",
+            description: "Use the interactive whiteboard for sketching, drawing shapes, and exporting high-quality PNG diagrams.",
+            keywords: ["whiteboard", "draw", "sketch", "canvas", "pen", "shapes", "diagram", "png"]
+        },
+        "audio-studio": {
+            title: "Audio Studio",
+            description: "Record, trim, and edit audio files directly in your browser. Supports both MP3 and WAV formats.",
+            keywords: ["audio", "record", "sound", "mic", "voice", "mp3", "wav", "editor", "ringtone", "trim"]
+        },
+        "video-editor": {
+            title: "Pro Video Editor",
+            description: "Learn timeline management, media trimming, and video rendering with our browser-based video editor.",
+            keywords: ["cut", "trim", "render", "timeline", "media", "mp4", "coming soon"]
+        },
+        "screen-recorder": {
+            title: "Screen Recorder",
+            description: "Capture your screen, display, or browser tab with high-quality 1080p/4K audio and video recording.",
+            keywords: ["screen", "record", "capture", "video", "display", "tab", "audio", "4k", "1080p", "chunk"]
+        },
+
+        // --- LABS & MISC ---
+        "ai-lab": {
+            title: "AI Lab",
+            description: "Integrate Google Gemini AI, manage API keys securely (Bring Your Own Key), and explore intelligent chat features.",
+            keywords: ["ai", "artificial intelligence", "gemini", "chat", "vision", "api key", "byok"]
+        },
+        "arcade": {
+            title: "Skill Arcade",
+            description: "Improve your reaction time, aim, typing speed (WPM), and memory with our collection of gamified tools.",
+            keywords: ["games", "play", "fun", "typing", "aim", "memory", "math", "speed", "wpm", "reaction"]
+        },
+        "legal": {
+            title: "Legal & Privacy Center",
+            description: "Comprehensive information regarding our privacy policies, terms of service, and open-source license attributions.",
+            keywords: ["privacy", "terms", "legal", "open source", "policy", "disclaimer"]
+        }
+    }
+};

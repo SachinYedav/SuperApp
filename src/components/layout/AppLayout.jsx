@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import MobileNav from './MobileNav';
+import AppFooter from '@/components/ui/AppFooter';
 
 export default function AppLayout() {
   return (
@@ -24,6 +25,7 @@ export default function AppLayout() {
             <Outlet />
           </div>
         </main>
+        <AppFooter />
         
       </div>
 

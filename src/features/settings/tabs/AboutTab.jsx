@@ -17,7 +17,7 @@ import {
   Video,
   Activity,
   Palette,
-  Grip
+  Grip, BookOpen
 } from "lucide-react";
 import { SectionHeader, LinkRow, Badge } from "@/components/ui/index";
 import pkg from "../../../../package.json"; 
@@ -82,6 +82,20 @@ export default function AboutTab() {
             desc="help@superapp.com"
             href="https://github.com/SachinYedav"
             isLast
+          />
+        </div>
+      </div>
+
+      {/* RESOURCES & DOCS */}
+      <div>
+        <SectionHeader label="Resources" />
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+          <LinkRow
+            icon={BookOpen}
+            label="SuperApp Documentation"
+            desc="Complete guide, architecture, and feature tutorials"
+            to="/docs" // react-router link
+            isLast={true}
           />
         </div>
       </div>

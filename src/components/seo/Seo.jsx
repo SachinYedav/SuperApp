@@ -83,6 +83,37 @@ export default function Seo({
       });
   }
 
+  if (type === "docs") {
+    jsonLd.push({
+      "@context": "https://schema.org",
+      "@type": "TechArticle", 
+      "headline": fullTitle,
+      "description": metaDescription,
+      "image": metaImage,
+      "proficiencyLevel": "Beginner", 
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": currentUrl
+      },
+      "author": {
+        "@type": "Person",
+        "name": author || siteConfig.author
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": siteTitle,
+        "logo": {
+          "@type": "ImageObject",
+          "url": siteConfig.logo
+        }
+      },
+      "datePublished": publishedTime || "2026-02-20T00:00:00Z", 
+      "dateModified": modifiedTime || new Date().toISOString(),
+      "articleSection": "Documentation",
+      "dependencies": "React 19, Appwrite, Tailwind CSS" 
+    });
+  }
+
   return (
     <>
       {/* Standard Tags */}

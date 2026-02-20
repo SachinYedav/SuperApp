@@ -19,6 +19,22 @@ export default function SmartSearchBar() {
   } = useSmartSearch();
 
   const [isFocused, setIsFocused] = useState(false);
+  const inputRef = useRef(null);
+
+  // new  Cmd+K / Ctrl+K Logic
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault(); 
+        if (inputRef.current) {
+          inputRef.current.focus(); 
+          setIsFocused(true); 
+        }
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -46,22 +62,36 @@ export default function SmartSearchBar() {
       {/* 1. INPUT FIELD */}
       <div className={`flex items-center gap-2 bg-slate-50 dark:bg-slate-800 px-3 py-2 rounded-lg border w-full transition-all duration-200 ${isFocused ? 'border-blue-500 ring-2 ring-blue-100 dark:ring-blue-900/30' : 'border-slate-200 dark:border-slate-700'}`}>
         {isSearching && query ? (
-           <Loader2 size={18} className="text-blue-500 animate-spin" />
+           <Loader2 size={18} className="text-blue-500 animate-spin shrink-0" />
         ) : (
-           <Search size={18} className="text-slate-400" />
+           <Search size={18} className="text-slate-400 shrink-0" />
         )}
         
         <input 
+          ref={inputRef} // NAYA: Ref attach kar diya
           type="text" 
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          onFocus={() => setIsFocused(true)} // Sirf Focus par khulega
+          onFocus={() => setIsFocused(true)}
           placeholder="Search tools, pages, files..." 
           className="bg-transparent border-none outline-none text-sm text-slate-700 dark:text-slate-200 w-full placeholder:text-slate-400"
         />
         
+        {/* Keyboard shortcut hint*/}
+        {!query && !isFocused && (
+            <kbd className="hidden lg:inline-block text-[10px] font-bold px-1.5 py-0.5 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded text-slate-400 pointer-events-none shrink-0">
+                ⌘K
+            </kbd>
+        )}
+
         {query && (
-            <button onClick={() => setQuery('')} className="text-slate-400 hover:text-slate-600">
+            <button 
+                onClick={() => {
+                    setQuery('');
+                    inputRef.current?.focus(); 
+                }} 
+                className="text-slate-400 hover:text-slate-600 shrink-0"
+            >
                 <X size={14} />
             </button>
         )}

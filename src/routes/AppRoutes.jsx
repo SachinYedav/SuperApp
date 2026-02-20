@@ -4,7 +4,7 @@ import { Loader2 } from 'lucide-react';
 
 // --- LAYOUTS ---
 import AppLayout from '../components/layout/AppLayout';
-// const DocsLayout = React.lazy(() => import('../components/layout/DocsLayout'));
+const DocsLayout = React.lazy(() => import('../components/layout/DocsLayout'));
 
 // --- LAZY LOADING PAGES (App World) ---
 const Dashboard = React.lazy(() => import('../pages/Dashboard'));
@@ -28,7 +28,7 @@ const ScreenRecorder = React.lazy(() => import('../features/screen-recorder/Scre
 const Whiteboard = React.lazy(() => import('../features/whiteboard/Whiteboard'));
 
 // --- LAZY LOADING DOCS (Docs World) ---
-// const DocViewer = React.lazy(() => import('../features/docs/DocViewer')); 
+const DocViewer = React.lazy(() => import('../features/docs/DocViewer')); 
 const NotFound = React.lazy(() => import('../pages/NotFound'));
 
 // Loading Fallback Component
@@ -89,12 +89,12 @@ export default function AppRoutes() {
         {/* ==========================================
             WORLD 2: DOCUMENTATION (Clean, Static, No App Sidebar)
             ========================================== */}
-        {/* ==========================================
+        {/* ========================================== */}
         <Route path="/docs" element={<DocsLayout />}>
           <Route index element={<DocViewer defaultDoc="introduction" />} />
           <Route path=":docId" element={<DocViewer />} />
         </Route>
-        ========================================== */}
+        {/* ========================================== */}
       </Routes>
     </Suspense>
   );
