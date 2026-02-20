@@ -30,6 +30,7 @@ const COL = {
   QUEUE: env('COL_QUEUE_ID'),
   OTP: env('COL_OTP_ID'),
   SEARCH_HISTORY: env('COL_SEARCH_HISTORY_ID'),
+  SCORE: env('COL_SCORE_ID'),
 };
 
 const BUCKET_ID = env('BUCKET_ID');
@@ -192,6 +193,7 @@ export default async ({ req, res, log, error }) => {
         const COLLECTIONS_TO_WIPE = [
           COL.OTP,
           COL.SEARCH_HISTORY,
+          COL.SCORE,
           COL.USERS,
         ].filter((id) => !!id);
 
