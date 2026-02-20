@@ -377,26 +377,38 @@ export class AuthService {
   }
 
   async disableMfa() {
-    console.log("🔴 Disabling MFA...");
-    if (typeof this.account.updateMfa === "function") {
-      await this.account.updateMfa(false);
-    } else {
-      await this.account.updateMFA({ mfa: false });
-    }
+    console.log("🔴 Disabling MFA & Deleting Authenticator...");
 
     try {
       if (typeof this.account.listAuthenticators === "function") {
         const list = await this.account.listAuthenticators();
         const totp = list.authenticators.find((a) => a.type === "totp");
-        if (totp) await this.account.deleteMfaAuthenticator(totp.$id);
+        
+        if (totp) {
+          await this.account.deleteMfaAuthenticator(totp.$id);
+          console.log("✅ Authenticator securely deleted from console.");
+        }
       } else {
+        // Fallback for v13
         await this.account.deleteMFAAuthenticator({ type: "totp" });
       }
-    } catch (cleanupError) {
-      console.warn("Authenticator delete skipped:", cleanupError.message);
+
+      if (typeof this.account.updateMfa === "function") {
+        await this.account.updateMfa(false);
+      } else {
+        await this.account.updateMFA({ mfa: false });
+      }
+
+      return true;
+
+    } catch (error) {
+      console.error("AuthService :: disableMfa :: error", error);
+      
+      if (error.code === 401) {
+        throw new Error("Security Alert: Session expired. Please log out and log back in to disable 2FA.");
+      }
+      throw error;
     }
-    
-    return true;
   }
 
   async getMfaStatus() {
