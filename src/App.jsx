@@ -9,6 +9,7 @@ import useOnlineStatus from '@/hooks/useOnlineStatus';
 import AuthModal from '@/components/auth/AuthModal';
 import AppRoutes from '@/routes/AppRoutes';
 import InstallPrompt from '@/components/pwa/InstallPrompt';
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -129,6 +130,8 @@ export default function App() {
 
   return (
     <>
+    <SpeedInsights />
+    
       <AuthModal 
         isOpen={isAuthModalOpen} 
         
